@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mariannys ❤️</title>
+    <style>
+        /* Estilos para que se vea lindo en el celular */
+        body { 
+            background-color: #ffdeeb; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh; 
+            margin: 0; 
+            font-family: 'Arial', sans-serif; 
+            overflow: hidden; 
+            text-align: center;
+        }
+        h1 { color: #d63384; font-size: 26px; padding: 0 20px; }
+        img { width: 220px; margin-bottom: 20px; border-radius: 20px; }
+        .botones { position: relative; width: 100%; height: 50px; }
+        
+        button { 
+            padding: 15px 30px; 
+            font-size: 18px; 
+            cursor: pointer; 
+            border: none; 
+            border-radius: 50px; 
+            transition: 0.3s; 
+            font-weight: bold;
+        }
+        
+        #btnSi { background-color: #ff4d8d; color: white; }
+        
+        #btnNo { 
+            background-color: #acacac; 
+            color: white; 
+            position: absolute; 
+            transition: 0.2s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="https://media.tenor.com/97m6UuA9f-kAAAAM/bubu-dudu-bubu.gif" alt="Ositos tiernos">
+
+    <h1>¿Quieres ser mi San Valentín, Mariannys? 💖</h1>
+
+    <div class="botones">
+        <button id="btnSi">¡SÍ! 😍</button>
+        <button id="btnNo">No 🥺</button>
+    </div>
+
+    <script>
+        const btnNo = document.getElementById('btnNo');
+        const btnSi = document.getElementById('btnSi');
+
+        // Función para que el botón "No" se mueva al tocarlo (celular) o pasar el mouse
+        const moverBoton = () => {
+            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight);
+            btnNo.style.left = x + 'px';
+            btnNo.style.top = y + 'px';
+        };
+
+        btnNo.addEventListener('touchstart', (e) => { e.preventDefault(); moverBoton(); });
+        btnNo.addEventListener('mouseover', moverBoton);
+
+        // Lo que pasa cuando le da a "SÍ"
+        btnSi.onclick = function() {
+            alert("¡Sabía que dirías que sí! Te amo muchísimo, Mariannys ❤️");
+            // Esto redirige a tu WhatsApp con un mensaje automático
+            window.location.href = "https://wa.me/?text=¡Siiiii!+Acepto+ser+tu+San+Valentín+❤️";
+        };
+    </script>
+
+</body>
+</html>
