@@ -12,7 +12,8 @@
             padding: 0;
             width: 100%;
             height: 100vh;
-            background: #020205;
+            /* Fondo de galaxia profundo */
+            background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
             color: white;
             font-family: 'Montserrat', sans-serif;
             overflow: hidden;
@@ -21,128 +22,82 @@
             align-items: center;
         }
 
-        /* Efecto de Galaxia Animada */
-        .stars-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-            z-index: -1;
-        }
-
-        /* Estrellas */
+        /* Estrellas animadas */
         .star {
             position: absolute;
             background: white;
             border-radius: 50%;
-            opacity: 0.5;
+            filter: drop-shadow(0 0 5px white);
             animation: twinkle var(--duration) infinite ease-in-out;
         }
 
         @keyframes twinkle {
             0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
+            50% { opacity: 1; transform: scale(1.5); }
         }
 
-        /* Contenedor de Texto */
         .content {
             text-align: center;
-            z-index: 1;
-            padding: 20px;
+            z-index: 10;
         }
 
         .nombre {
             font-family: 'Dancing Script', cursive;
-            font-size: 3.5rem;
+            font-size: 4rem;
             color: #ff4d8d;
-            text-shadow: 0 0 20px rgba(255, 77, 141, 0.8);
-            margin-bottom: 20px;
-            animation: fadeIn 2s ease-in;
-        }
-
-        .compliment-box {
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            text-shadow: 0 0 15px #ff4d8d, 0 0 30px #ff4d8d;
+            margin-bottom: 10px;
         }
 
         #compliment {
-            font-size: 1.5rem;
-            font-weight: 300;
-            letter-spacing: 2px;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            transition: opacity 1s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            height: 50px;
+            transition: opacity 1s;
         }
     </style>
 </head>
 <body>
 
-    <div class="stars-container" id="starField"></div>
+    <div id="stars"></div>
 
     <div class="content">
         <div class="nombre">Mariannys</div>
-        <div class="compliment-box">
-            <div id="compliment">Eres mi estrella favorita</div>
-        </div>
+        <div id="compliment">LO MÁS LINDO DE MI UNIVERSO</div>
     </div>
 
     <script>
-        // Generar estrellas aleatorias
-        const starField = document.getElementById('starField');
-        const starCount = 150;
-
-        for (let i = 0; i < starCount; i++) {
+        // Crear 150 estrellas manualmente para asegurar que salgan
+        const container = document.getElementById('stars');
+        for (let i = 0; i < 150; i++) {
             const star = document.createElement('div');
             star.className = 'star';
             const size = Math.random() * 3 + 'px';
             star.style.width = size;
             star.style.height = size;
-            star.style.top = Math.random() * 100 + '%';
-            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.left = Math.random() * 100 + 'vw';
             star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-            starField.appendChild(star);
+            container.appendChild(star);
         }
 
-        // Lista de cumplidos
-        const compliments = [
-            "Eres increíble",
-            "Tu sonrisa ilumina mi mundo",
-            "Eres pura magia",
-            "Lo más lindo de mi universo",
-            "Inteligente y hermosa",
-            "Única en un millón",
-            "Brillas más que cualquier estrella"
+        // Cambiar cumplidos
+        const phrases = [
+            "LO MÁS LINDO DE MI UNIVERSO",
+            "ERES PURA MAGIA",
+            "MI ESTRELLA FAVORITA",
+            "ERES INCREÍBLE",
+            "NUNCA DEJES DE BRILLAR"
         ];
-
-        let index = 0;
-        const complimentEl = document.getElementById('compliment');
-
-        function changeCompliment() {
-            complimentEl.style(opacity = 0);
-            setTimeout(() => {
-                index = (index + 1) % compliments.length;
-                complimentEl.textContent = compliments[index];
-                complimentEl.style(opacity = 1);
-            }, 1000);
-        }
-
-        // Error corregido en la función de opacidad
+        let i = 0;
         setInterval(() => {
-            complimentEl.style.opacity = 0;
+            const el = document.getElementById('compliment');
+            el.style.opacity = 0;
             setTimeout(() => {
-                index = (index + 1) % compliments.length;
-                complimentEl.innerText = compliments[index];
-                complimentEl.style.opacity = 1;
+                i = (i + 1) % phrases.length;
+                el.innerText = phrases[i];
+                el.style.opacity = 1;
             }, 1000);
         }, 4000);
     </script>
